@@ -2,12 +2,15 @@ package com.mlooser.learn.beanlifecycle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class BeanLifecycleApplication {
-//test
+
 	public static void main(String[] args) {
-		SpringApplication.run(BeanLifecycleApplication.class, args);
+            ApplicationContext ctx = SpringApplication.run(BeanLifecycleApplication.class, args);
+            
+            ctx.getBean("testLifecycleBean");
 	}
 
 }
