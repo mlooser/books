@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BeanLifecycleApplicationTests {
-//comit test 2
+//comit test 3
 	@Test
 	public void contextLoads() {
 	}
