@@ -1,8 +1,18 @@
 package com.mlooser.learn.eagleeye.licensingservice.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class License {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String productName;
+	private String comment;
 	private Long organizationId;
 	
 	public License() {
@@ -36,5 +46,12 @@ public class License {
 	public void setOrganizationId(Long organizationId) {
 		this.organizationId = organizationId;
 	}
-	
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}	
 }
