@@ -2,11 +2,13 @@ package com.mlooser.learn.eagleeye.organizationservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationContext;
 
 import com.mlooser.learn.eagleeye.organizationservice.repositories.OrganizationRepository;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class OrganizationServiceApplication {
 
 	public static void main(String[] args) {
