@@ -1,6 +1,9 @@
 package com.mlooser.learn.aoppointcuts;
 
+import org.springframework.aop.Pointcut;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.support.ComposablePointcut;
+import org.springframework.aop.support.ControlFlowPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.aop.support.NameMatchMethodPointcut;
@@ -21,8 +24,32 @@ public class AopPointcutsApplication {
 		runNameMatchingPointcut();
 		runRegexMatchingPointcut();
 		runAnnotationMatchingPointcut();
+		runComposablePointcut();
+		runFlowControllPointcut();
 	}
 
+	private static void runComposablePointcut() {
+		ProxyFactory pf = new ProxyFactory();
+		
+		AnnotationMatchingPointcut rmp = AnnotationMatchingPointcut
+				.forMethodAnnotation(AdviceRequired.class);
+		
+		SimpleDynamicPointcut sdp = new SimpleDynamicPointcut("ComposablePointcut adviced");
+		
+		ComposablePointcut cp = new ComposablePointcut()
+				.intersection(rmp)
+				.intersection((Pointcut)sdp);
+		
+		pf.addAdvisor(new DefaultPointcutAdvisor(cp,
+				new AroundAdvice("ComposablePointcut advice")));
+
+		pf.setTarget(new TestBean());
+
+		TestBean testBean = (TestBean) pf.getProxy();
+		testBean.annotadedTestMethod("ComposablePointcut adviced");
+		testBean.annotadedTestMethod("ComposablePointcut not adviced");
+	}
+	
 	private static void runAnnotationMatchingPointcut() {
 		ProxyFactory pf = new ProxyFactory();
 		AnnotationMatchingPointcut rmp = AnnotationMatchingPointcut
@@ -83,5 +110,24 @@ public class AopPointcutsApplication {
 
 		TestBean testBean = (TestBean) pf.getProxy();
 		testBean.testMethod("SimpleDynamicPointcut test");
+	}
+	
+	private static void runFlowControllPointcut() {
+		ProxyFactory pf = new ProxyFactory();
+		pf.addAdvisor(new DefaultPointcutAdvisor(
+					new ControlFlowPointcut(
+							AopPointcutsApplication.class, 
+							"callTestMethod"),
+				new AroundAdvice("ControlFlowPointcut advice")));
+
+		pf.setTarget(new TestBean());
+
+		TestBean testBean = (TestBean) pf.getProxy();
+		new AopPointcutsApplication().callTestMethod(testBean, "ControlFlowPointcut adviced");
+		testBean.testMethod("ControlFlowPointcut not adviced");	
+	}
+	
+	private void callTestMethod(TestBean testBean, String arg) {
+		testBean.testMethod(arg);
 	}
 }
