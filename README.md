@@ -13,7 +13,9 @@ Test of pointcuts defined with:
   * StaticMethodMatcherPointcutAdvisor, 
   * AnnotationMatchingPointcut, 
   * JdkRegexpMethodPointcut, 
-  * NameMatchMethodPointcut
+  * NameMatchMethodPointcut,
+  * ControlFlowPointcut,
+  * ComposablePointcut.
 
 ## bean-lifecycle
 Hook to lifecycle events with 
