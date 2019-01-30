@@ -7,6 +7,9 @@ Test of using JSR-330 annotations.
 ## aop-advices 
 Test of implemending before, after, after throw and around advices.
 
+## aop-introduction
+Tracks if POJO instance was modified using AOP Introduction.
+
 ## aop-pointcuts
 Test of pointcuts defined with:
   * DynamicMethodMatcherPointcut, 
