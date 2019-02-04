@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class License {
@@ -14,6 +15,9 @@ public class License {
 	private String productName;
 	private String comment;
 	private Long organizationId;
+	
+	@Transient
+	private Organization organization;
 	
 	public License() {
 		super();
@@ -53,5 +57,13 @@ public class License {
 
 	public void setComment(String comment) {
 		this.comment = comment;
-	}	
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}		
 }

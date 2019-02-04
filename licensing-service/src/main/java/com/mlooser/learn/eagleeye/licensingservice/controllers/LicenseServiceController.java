@@ -5,21 +5,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mlooser.learn.eagleeye.licensingservice.clients.OrganizationClient;
 import com.mlooser.learn.eagleeye.licensingservice.config.ServiceConfig;
 import com.mlooser.learn.eagleeye.licensingservice.model.License;
+import com.mlooser.learn.eagleeye.licensingservice.model.Organization;
 import com.mlooser.learn.eagleeye.licensingservice.services.LicenseServices;
 
 @RestController
-@RequestMapping("/v1/organizations/{organizationId}/licenses")
+@RequestMapping("/organizations/{organizationId}/licenses")
 public class LicenseServiceController {
 
 	private LicenseServices licenseService;
 	private ServiceConfig config;	
+	private OrganizationClient organizationClient;
 	
-	public LicenseServiceController(LicenseServices licenseService, ServiceConfig config) {
+	public LicenseServiceController(LicenseServices licenseService, ServiceConfig config, OrganizationClient organizationClient) {
 		super();
 		this.licenseService = licenseService;
 		this.config = config;
+		this.organizationClient = organizationClient;
 	}
 
 	@RequestMapping(value="/{lindenseId}", method = RequestMethod.GET)
@@ -36,6 +40,9 @@ public class LicenseServiceController {
 		}
 		license.setComment(config.getExampleProperty());
 		
+		Organization organization = organizationClient.getOrganization(organizationIdLong);
+		license.setOrganization(organization);		
+		
 		return license;		
-	}
+	}	
 }
