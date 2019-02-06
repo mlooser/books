@@ -1,6 +1,7 @@
 package com.mlooser.learn.eagleeye.licensingservice.controllers;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,7 @@ public class LicenseServiceController {
 
 	@RequestMapping(value="/{lindenseId}", method = RequestMethod.GET)
 	public License getLicenses(
+			@RequestHeader("Authorization") String authorizationHeader,
 			@PathVariable("organizationId") String organizationId, 
 			@PathVariable("lindenseId") String licenseId) {
 		
@@ -39,8 +41,8 @@ public class LicenseServiceController {
 			license = new License(licenseIdLong, "Default License", organizationIdLong);
 		}
 		license.setComment(config.getExampleProperty());
-		
-		Organization organization = organizationClient.getOrganization(organizationIdLong);
+		System.out.println("Fetched AuthorizationHeaded " + authorizationHeader);
+		Organization organization = organizationClient.getOrganization(authorizationHeader, organizationIdLong);
 		license.setOrganization(organization);		
 		
 		return license;		
