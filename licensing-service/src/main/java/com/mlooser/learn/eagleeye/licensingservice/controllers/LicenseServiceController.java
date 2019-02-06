@@ -41,7 +41,7 @@ public class LicenseServiceController {
 			license = new License(licenseIdLong, "Default License", organizationIdLong);
 		}
 		license.setComment(config.getExampleProperty());
-		System.out.println("Fetched AuthorizationHeaded " + authorizationHeader);
+		
 		Organization organization = organizationClient.getOrganization(authorizationHeader, organizationIdLong);
 		license.setOrganization(organization);		
 		
