@@ -1,6 +1,6 @@
-package org.mlooser.learn.spring.configurebean;
+package org.mlooser.learn.spring.calculator;
 
-import org.mlooser.learn.spring.configurebean.operations.Operation;
+import org.mlooser.learn.spring.calculator.operations.Operation;
 
 import java.util.Collection;
 

@@ -1,6 +1,6 @@
-package org.mlooser.learn.spring.configurebean;
+package org.mlooser.learn.spring.calculator;
 
-import org.mlooser.learn.spring.configurebean.operations.Operation;
+import org.mlooser.learn.spring.calculator.operations.Operation;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Bean;
 import java.util.Collection;
 
 @SpringBootApplication
-public class ConfigureBeanApplication {
+public class CalculatorApplication {
 
     public static void main(String[] args) {
 
-    	SpringApplication.run(ConfigureBeanApplication.class, args);
+    	SpringApplication.run(CalculatorApplication.class, args);
     }
 
     @Bean

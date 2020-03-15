@@ -1,8 +1,8 @@
-package org.mlooser.learn.spring.configurebean;
+package org.mlooser.learn.spring.calculator;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mlooser.learn.spring.configurebean.operations.Operation;
+import org.mlooser.learn.spring.calculator.operations.Operation;
 
 import java.util.Collections;
 

@@ -1,4 +1,4 @@
-package org.mlooser.learn.spring.configurebean;
+package org.mlooser.learn.spring.calculator;
 
 import org.springframework.stereotype.Component;
 
