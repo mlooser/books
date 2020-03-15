@@ -12,6 +12,15 @@ public class Calculator {
     }
 
     public int calculate(int lhs, int rhs, char op) {
+        StringBuilder msg = new StringBuilder()
+                .append(lhs)
+                .append(' ')
+                .append(op)
+                .append(' ')
+                .append(rhs);
+
+        System.out.println(msg);
+
         for (Operation operation : operations) {
             if (operation.handles(op)) {
                 return operation.apply(lhs, rhs);
