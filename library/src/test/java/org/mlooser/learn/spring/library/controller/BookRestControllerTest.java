@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(BookController.class)
-public class BookControllerTest {
+@WebMvcTest(BookRestController.class)
+public class BookRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,7 +40,7 @@ public class BookControllerTest {
                 ));
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/books"))
+                .perform(MockMvcRequestBuilders.get("/api/books"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[*].isbn", containsInAnyOrder("i1", "i2")))
@@ -53,7 +53,7 @@ public class BookControllerTest {
                 .thenReturn(Optional.empty());
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/books/123"))
+                .perform(MockMvcRequestBuilders.get("/api/books/123"))
                 .andExpect(status().isNotFound());
     }
 
@@ -63,7 +63,7 @@ public class BookControllerTest {
                 .thenReturn(Optional.of(new Book("t1", "i1", "a1")));
 
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/books/i1"))
+                .perform(MockMvcRequestBuilders.get("/api/books/i1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isbn", equalTo("i1")))
                 .andExpect(jsonPath("$.title", equalTo("t1")));

@@ -23,7 +23,7 @@ public class HelloWorldControllerTest {
     @Test
     public void sayHelloTest() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.get("/"))
+                .perform(MockMvcRequestBuilders.get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello from Spring Boot 2"))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));

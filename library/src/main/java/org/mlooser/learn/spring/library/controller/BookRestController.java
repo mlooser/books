@@ -9,11 +9,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/api/books")
+public class BookRestController {
     private final BookService bookService;
 
-    public BookController(BookService bookService) {
+    public BookRestController(BookService bookService) {
         this.bookService = bookService;
     }
 
