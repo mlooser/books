@@ -29,4 +29,9 @@ public class BookController {
 
         return "books/details";
     }
+
+    @GetMapping("/books/500")
+    public String testError(){
+        throw new NullPointerException("Test NPE");
+    }
 }
