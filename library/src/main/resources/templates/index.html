@@ -6,6 +6,13 @@
 </head>
 <body>
 <h1 th:text="#{index.title}">Library</h1>
+
+<h3 th:text="#{main.language}">Languages</h3>
+<div>
+    <a href="?locale=en" th:text="#{main.language.en}">English</a>|
+    <a href="?locale=pl" th:text="#{main.language.pl}">Polish</a>
+</div>
+
 <a th:href="@{/books.html}" href="#" th:text="#{index.books.link}">List of
     books</a>
 </body>
