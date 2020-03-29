@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -40,6 +42,7 @@ public class LibraryApplication implements WebMvcConfigurer {
 	}
 
 	@Bean
+	@Profile("prd")
 	public TomcatServletWebServerFactory  tomcatServletWebServerFactory(){
 		TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
 		factory.addAdditionalTomcatConnectors(httpConnector());
