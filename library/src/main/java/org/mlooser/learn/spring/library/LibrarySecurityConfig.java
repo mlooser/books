@@ -1,15 +1,24 @@
 package org.mlooser.learn.spring.library;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class LibrarySecurityConfig
         extends WebSecurityConfigurerAdapter
         implements WebMvcConfigurer {
+
+    @Autowired
+    private DataSource dataSource;
 
     public LibrarySecurityConfig(){
         super(true);
@@ -20,6 +29,34 @@ public class LibrarySecurityConfig
         registry
                 .addViewController("/login.html")
                 .setViewName("login");
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        UserDetails adminUser = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("aaa")
+                .authorities("ADMIN","USER")
+                .build();
+
+        UserDetails normalUser = User.withDefaultPasswordEncoder()
+                .username("normal")
+                .password("nnn")
+                .authorities("USER")
+                .build();
+
+        UserDetails disabledUSer = User.withDefaultPasswordEncoder()
+                .username("dnormal")
+                .password("nnn")
+                .authorities("USER")
+                .build();
+
+        auth.inMemoryAuthentication()
+                .withUser(adminUser)
+                .withUser(normalUser)
+                .withUser(disabledUSer);
+
+        auth.jdbcAuthentication().dataSource(dataSource);
     }
 
     @Override
