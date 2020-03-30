@@ -8,4 +8,5 @@ public interface BookService {
     Iterable<Book> findAll();
     Book create(Book book);
     Optional<Book> find(String isbn);
+    void remove(String isbn);
 }

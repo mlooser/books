@@ -2,6 +2,7 @@ package org.mlooser.learn.spring.library.service;
 
 import org.mlooser.learn.spring.library.Book;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class InMemoryBookService implements BookService {
     private Map<String, Book> booksByIsbn = new HashMap<>();
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Iterable<Book> findAll() {
         return booksByIsbn.values();
     }
@@ -26,5 +28,11 @@ public class InMemoryBookService implements BookService {
     @Override
     public Optional<Book> find(String isbn) {
         return Optional.ofNullable(booksByIsbn.get(isbn));
+    }
+
+    @Override
+    @PreAuthorize("@accessChecker.canDeleteBooks(authentication)")
+    public void remove(String isbn){
+        booksByIsbn.remove(isbn);
     }
 }
