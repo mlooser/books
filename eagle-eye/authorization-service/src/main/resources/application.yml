@@ -1,0 +1,3 @@
+server:
+  contextPath:   /auth
+  port: 8082
