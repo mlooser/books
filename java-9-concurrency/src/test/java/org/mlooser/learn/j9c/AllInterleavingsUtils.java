@@ -30,7 +30,7 @@ public class AllInterleavingsUtils {
         List<Thread> threads = Arrays
                 .stream(runables)
                 .map(Thread::new)
-                .map(t->{t.start(); return t;})
+                .map(t->{t.start(); return t;})//peek doesn't work
                 .collect(Collectors.toList());
 
         //vmlens doesn't work properly when "join" is combined with stream
